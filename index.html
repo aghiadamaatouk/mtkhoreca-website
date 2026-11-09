@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MTK HORECA | Hospitality Supplies in Syria</title>
 <meta name="description" content="MTK HORECA supplies professional tableware, glassware, cutlery, buffet equipment and kitchen essentials to hotels, restaurants, cafés and caterers across Syria. Showroom in Damascus.">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HCLRF15586"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','G-HCLRF15586');
+</script>
 <link rel="canonical" href="https://mtkhoreca.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MTK HORECA">
@@ -607,8 +612,23 @@ setLang(saved||"en");
 document.getElementById("burger").addEventListener("click",()=>document.getElementById("navlinks").classList.toggle("open"));
 document.querySelectorAll("#navlinks a").forEach(a=>a.addEventListener("click",()=>document.getElementById("navlinks").classList.remove("open")));
 
+
+// analytics: count enquiry actions
+function track(name,params){try{if(window.gtag)gtag('event',name,Object.assign({language:lang},params||{}))}catch(e){}}
+document.addEventListener("click",e=>{
+  const a=e.target.closest("a"); if(!a) return;
+  const h=a.getAttribute("href")||"";
+  const where=a.classList.contains("wa-float")?"floating_button":(a.closest("header")?"header":a.closest("footer")?"footer":(a.closest("section")||{}).id||"page");
+  if(h.includes("wa.me")) track("whatsapp_click",{location:where});
+  else if(h.startsWith("tel:")) track("phone_click",{location:where});
+  else if(h.startsWith("mailto:")) track("email_click",{location:where});
+  else if(h.includes("maps.app.goo.gl")) track("maps_click",{location:where});
+  else if(a.classList.contains("btn")&&h.startsWith("#")) track("cta_click",{target:h.slice(1),location:where});
+});
+document.getElementById("langBtn").addEventListener("click",()=>track("language_switch",{to:lang}));
 document.getElementById("quoteForm").addEventListener("submit",e=>{
   e.preventDefault();
+  track("quote_form_submit",{business_type:document.getElementById("f_type").value});
   const v=id=>document.getElementById(id).value.trim();
   const lines=lang==="ar"?[
     "مرحباً إم تي كيه هوريكا",
