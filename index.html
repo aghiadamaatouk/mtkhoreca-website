@@ -126,7 +126,9 @@ html[lang="ar"] .pillar h4{letter-spacing:0;text-transform:none;font-size:16px}
 .head h2{margin-top:16px;max-width:640px}
 
 /* collections */
-.cats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.cats{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.cats .cat{grid-column:span 2}
+.cats .cat:nth-child(n+4){grid-column:span 3}
 .cat{background:#fff;padding:42px 36px;transition:.3s;position:relative}
 .cat::after{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:var(--black);transform:scaleX(0);transition:.35s;transform-origin:left}
 .cat:hover::after{transform:scaleX(1)}
@@ -238,6 +240,8 @@ footer a:hover{color:#fff}
   .pillar:nth-child(2){border-inline-end:0}
   .pillar{border-bottom:1px solid var(--line-d)}
   .cats{grid-template-columns:1fr 1fr}
+  .cats .cat,.cats .cat:nth-child(n+4){grid-column:auto}
+  .cats .cat:last-child{grid-column:1/-1}
   .feature{grid-template-columns:1fr}
   .bcat{grid-template-columns:1fr;gap:12px}
   .serve-grid,.steps{grid-template-columns:1fr 1fr;gap:30px}
@@ -291,6 +295,7 @@ footer a:hover{color:#fff}
 
   /* collections: compact rows, icon beside text */
   .cats{grid-template-columns:1fr}
+  .cats .cat:last-child{grid-column:auto}
   .cat{display:grid;grid-template-columns:38px 1fr;gap:4px 16px;padding:20px 18px;align-items:start}
   .cat svg{width:34px;height:34px;margin:2px 0 0;grid-row:span 2}
   .cat h3{font-size:16px;margin-bottom:2px}
@@ -417,9 +422,8 @@ footer a:hover{color:#fff}
       <div class="cat reveal"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="20"/><circle cx="24" cy="24" r="13"/><circle cx="24" cy="24" r="6"/></svg><h3 data-i18n="c1_t">Porcelain</h3><p data-i18n="c1_d">Plates, bowls and serving pieces in fine and hotel grade porcelain, from classic white to signature collections.</p></div>
       <div class="cat reveal"><svg viewBox="0 0 48 48"><path d="M15 6h18l-2 16a7 7 0 0 1-14 0L15 6z"/><path d="M24 29v12M17 42h14"/></svg><h3 data-i18n="c2_t">Glassware</h3><p data-i18n="c2_d">Wine, water, cocktail and barware in crystal and toughened glass built for commercial dishwashers.</p></div>
       <div class="cat reveal"><svg viewBox="0 0 48 48"><path d="M16 6v12a4 4 0 0 0 4 4v20M12 6v10M20 6v10"/><path d="M33 42V6c-4 4-6 10-6 16h6"/></svg><h3 data-i18n="c3_t">Cutlery</h3><p data-i18n="c3_d">Stainless steel flatware patterns for fine dining, banqueting and everyday service.</p></div>
-      <div class="cat reveal"><svg viewBox="0 0 48 48"><path d="M6 32h36M10 32a14 14 0 0 1 28 0"/><path d="M24 14v4M4 38h40"/></svg><h3 data-i18n="c4_t">Buffet & Serving</h3><p data-i18n="c4_d">Chafing dishes, risers, display systems and serving equipment for breakfast, banquets and events.</p></div>
-      <div class="cat reveal"><svg viewBox="0 0 48 48"><path d="M8 20h32v14a6 6 0 0 1-6 6H14a6 6 0 0 1-6-6V20z"/><path d="M4 20h40M18 12c0-3 2-4 2-6M26 12c0-3 2-4 2-6"/></svg><h3 data-i18n="c5_t">Kitchen Essentials</h3><p data-i18n="c5_d">Professional kitchenware, preparation tools and storage for working kitchens.</p></div>
-      <div class="cat reveal"><svg viewBox="0 0 48 48"><path d="M10 40V18l14-10 14 10v22"/><path d="M19 40V28h10v12"/></svg><h3 data-i18n="c6_t">Hospitality Accessories</h3><p data-i18n="c6_d">Bar tools, table accessories and the finishing details that complete a guest experience.</p></div>
+      <div class="cat reveal"><svg viewBox="0 0 48 48"><path d="M6 32h36M10 32a14 14 0 0 1 28 0"/><path d="M24 14v4M4 38h40"/></svg><h3 data-i18n="c4_t">Buffet & Serving Equipment</h3><p data-i18n="c4_d">Chafing dishes, risers, display systems and serving equipment for breakfast, banquets and events.</p></div>
+      <div class="cat reveal"><svg viewBox="0 0 48 48"><path d="M8 20h32v14a6 6 0 0 1-6 6H14a6 6 0 0 1-6-6V20z"/><path d="M4 20h40M18 12c0-3 2-4 2-6M26 12c0-3 2-4 2-6"/></svg><h3 data-i18n="c5_t">Kitchen & Table Accessories</h3><p data-i18n="c5_d">Professional kitchenware and preparation tools, plus bar tools and table accessories that complete the guest experience.</p></div>
     </div>
   </div>
 </section>
@@ -573,9 +577,8 @@ const T = {
   c1_t:"البورسلان",c1_d:"صحون وأوعية وقطع تقديم من البورسلان الفاخر والفندقي من الأبيض الكلاسيكي إلى المجموعات المميزة",
   c2_t:"الزجاجيات",c2_d:"كؤوس للنبيذ والماء والكوكتيل وأدوات البار من الكريستال والزجاج المقوّى المناسب لغسالات الصحون التجارية",
   c3_t:"أدوات المائدة",c3_d:"ملاعق وشوك وسكاكين من الفولاذ المقاوم للصدأ للمطاعم الراقية والمآدب والخدمة اليومية",
-  c4_t:"البوفيه والتقديم",c4_d:"سخانات الطعام ومنصات العرض ومعدات التقديم للفطور والمآدب والمناسبات",
-  c5_t:"مستلزمات المطبخ",c5_d:"أدوات مطبخ احترافية وأدوات تحضير وحفظ للمطابخ العاملة",
-  c6_t:"إكسسوارات الضيافة",c6_d:"أدوات البار وإكسسوارات الطاولة واللمسات الأخيرة التي تكمل تجربة الضيف",
+  c4_t:"البوفيه ومعدات التقديم",c4_d:"سخانات الطعام ومنصات العرض ومعدات التقديم للفطور والمآدب والمناسبات",
+  c5_t:"إكسسوارات المطبخ والطاولة",c5_d:"أدوات مطبخ احترافية وأدوات تحضير مع أدوات البار وإكسسوارات الطاولة التي تكمل تجربة الضيف",
   br_eyebrow:"علاماتنا التجارية",br_title:"مجموعة مختارة للطاولة الاحترافية",
   br_lead:"نتعامل مع مصنّعين عالميين راسخين لتتمكن من مطابقة كل قطعة وإعادة طلبها لسنوات",
   va_wm:"<b>فيستا أليغري</b><small>البرتغال منذ ١٨٢٤</small>",va_eyebrow:"علامة مميزة",va_title:"فيستا أليغري في سوريا",
