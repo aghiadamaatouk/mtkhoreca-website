@@ -148,7 +148,12 @@ html[lang="ar"] .feature-art .wm small{letter-spacing:0;font-size:14px}
 .feature-body h3{font-size:28px;margin:14px 0 14px}
 html[lang="ar"] .feature-body h3{font-size:24px}
 .feature-body p{color:var(--muted)}
-.brand-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.brand-cats{border-top:1px solid var(--line)}
+.bcat{display:grid;grid-template-columns:240px 1fr;gap:24px;align-items:center;padding:22px 0;border-bottom:1px solid var(--line)}
+.bcat h3{font-size:15px;font-weight:700;letter-spacing:.04em}
+html[lang="ar"] .bcat h3{font-size:17px}
+.bcat-list{display:flex;flex-wrap:wrap;gap:8px}
+.brand-cats .brand{height:auto;padding:11px 16px;border:1px solid var(--line);font-size:12px}
 .brand{background:#fff;height:96px;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;font-family:var(--head);font-size:13px;font-weight:600;color:#2a2a2a;letter-spacing:.14em;text-transform:uppercase;transition:.25s}
 html[lang="ar"] .brand{font-size:15px;font-weight:500;letter-spacing:0;text-transform:none}
 .brand:hover{background:var(--black);color:#fff}
@@ -234,7 +239,7 @@ footer a:hover{color:#fff}
   .pillar{border-bottom:1px solid var(--line-d)}
   .cats{grid-template-columns:1fr 1fr}
   .feature{grid-template-columns:1fr}
-  .brand-grid{grid-template-columns:repeat(3,1fr)}
+  .bcat{grid-template-columns:1fr;gap:12px}
   .serve-grid,.steps{grid-template-columns:1fr 1fr;gap:30px}
   .showroom-grid,.contact-grid{grid-template-columns:1fr}
   .contact-grid{gap:40px}
@@ -300,9 +305,11 @@ footer a:hover{color:#fff}
   .feature-body{padding:24px 20px}
   .feature-body h3{font-size:21px;margin:8px 0 8px}
   .feature-body p{font-size:14px}
-  .brand-grid{grid-template-columns:repeat(3,1fr)}
-  .brand{height:62px;font-size:10px;letter-spacing:.08em;padding:6px;line-height:1.35}
-  html[lang="ar"] .brand{font-size:12.5px}
+  .bcat{padding:18px 0;gap:10px}
+  .bcat h3{font-size:14px}
+  .bcat-list{gap:6px}
+  .brand-cats .brand{padding:8px 11px;font-size:10.5px;letter-spacing:.08em}
+  html[lang="ar"] .brand-cats .brand{font-size:13px}
 
   /* who we serve 2 x 2 */
   .serve-grid{grid-template-columns:1fr 1fr;gap:26px 16px}
@@ -407,7 +414,7 @@ footer a:hover{color:#fff}
       <p class="lead" data-i18n="col_lead">One partner for front of house and back of house, chosen for durability in daily professional use.</p>
     </div>
     <div class="cats">
-      <div class="cat reveal"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="20"/><circle cx="24" cy="24" r="13"/><circle cx="24" cy="24" r="6"/></svg><h3 data-i18n="c1_t">Porcelain & Dinnerware</h3><p data-i18n="c1_d">Plates, bowls and serving pieces in fine and hotel grade porcelain, from classic white to signature collections.</p></div>
+      <div class="cat reveal"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="20"/><circle cx="24" cy="24" r="13"/><circle cx="24" cy="24" r="6"/></svg><h3 data-i18n="c1_t">Porcelain</h3><p data-i18n="c1_d">Plates, bowls and serving pieces in fine and hotel grade porcelain, from classic white to signature collections.</p></div>
       <div class="cat reveal"><svg viewBox="0 0 48 48"><path d="M15 6h18l-2 16a7 7 0 0 1-14 0L15 6z"/><path d="M24 29v12M17 42h14"/></svg><h3 data-i18n="c2_t">Glassware</h3><p data-i18n="c2_d">Wine, water, cocktail and barware in crystal and toughened glass built for commercial dishwashers.</p></div>
       <div class="cat reveal"><svg viewBox="0 0 48 48"><path d="M16 6v12a4 4 0 0 0 4 4v20M12 6v10M20 6v10"/><path d="M33 42V6c-4 4-6 10-6 16h6"/></svg><h3 data-i18n="c3_t">Cutlery</h3><p data-i18n="c3_d">Stainless steel flatware patterns for fine dining, banqueting and everyday service.</p></div>
       <div class="cat reveal"><svg viewBox="0 0 48 48"><path d="M6 32h36M10 32a14 14 0 0 1 28 0"/><path d="M24 14v4M4 38h40"/></svg><h3 data-i18n="c4_t">Buffet & Serving</h3><p data-i18n="c4_d">Chafing dishes, risers, display systems and serving equipment for breakfast, banquets and events.</p></div>
@@ -431,7 +438,7 @@ footer a:hover{color:#fff}
         <p data-i18n="va_text">Portugal's most celebrated porcelain house, combining two centuries of craftsmanship with collections designed for luxury hotels and fine dining. Discover the range at our Damascus showroom.</p>
       </div>
     </div>
-    <div class="brand-grid" id="brandGrid"></div>
+    <div class="brand-cats" id="brandGrid"></div>
     <p class="brand-note" data-i18n="br_note">Brand names are trademarks of their respective owners. Ask us about ranges not shown here.</p>
   </div>
 </section>
@@ -540,12 +547,14 @@ footer a:hover{color:#fff}
 </footer>
 
 <script>
-const BRANDS = [
-  ["Utopia","يوتوبيا"],["WMF","دبليو إم إف"],["Churchill","تشرشل"],["Bauscher","باوشر"],
-  ["Schott Zwiesel","شوت تسفيزل"],["Zwiesel Glas","تسفيزل غلاس"],["Stölzle Lausitz","شتولتسله لاوزيتس"],["Sola","سولا"],
-  ["Amefa","أميفا"],["Pepper Style by Bisetti","بيبر ستايل من بيزيتي"],["Leone","ليوني"],["Bonna","بونا"],
-  ["Sunnex","سانيكس"],["Pirge","بيرغه"],["Style Point","ستايل بوينت"],["Playground","بلاي غراوند"],["WAS Germany","واس ألمانيا"],["Thaihoo Glass","تايهو غلاس"]
+const BRAND_CATS = [
+  {en:"Porcelain", ar:"البورسلان", brands:["Bauscher","Bonna","Churchill","Heart & Soul","Playground","StylePoint","Utopia","Vista Alegre"]},
+  {en:"Glassware", ar:"الزجاجيات", brands:["Stölzle","Utopia","WMF"]},
+  {en:"Cutlery", ar:"أدوات المائدة", brands:["Amefa","Sola","Sunnex","Vista Alegre","WMF"]},
+  {en:"Buffet & Serving Equipment", ar:"البوفيه ومعدات التقديم", brands:["Leone","StylePoint","Sunnex","WAS Germany","WMF"]},
+  {en:"Kitchen & Table Accessories", ar:"إكسسوارات المطبخ والطاولة", brands:["32 Dumas","Bisetti","de Buyer","Lion Sabatier","Pirge","Sola","Sunnex","Utopia","WAS Germany"]}
 ];
+const BRAND_AR = {"Bauscher":"باوشر","Bonna":"بونا","Churchill":"تشرشل","Heart & Soul":"هارت أند سول","Playground":"بلاي غراوند","StylePoint":"ستايل بوينت","Utopia":"يوتوبيا","Vista Alegre":"فيستا أليغري","Stölzle":"شتولتسله","WMF":"دبليو إم إف","Amefa":"أميفا","Sola":"سولا","Sunnex":"سانيكس","Leone":"ليوني","WAS Germany":"واس ألمانيا","32 Dumas":"٣٢ دوما","Bisetti":"بيزيتي","de Buyer":"دو بويه","Lion Sabatier":"ليون ساباتييه","Pirge":"بيرغه"};
 const T = {
  en:{},
  ar:{
@@ -561,7 +570,7 @@ const T = {
   p4_t:"إعادة الطلب والاستبدال",p4_d:"استمرارية المجموعات التي تختارها على المدى الطويل",
   col_eyebrow:"المجموعات",col_title:"كل ما تحتاجه الطاولة والمطبخ",
   col_lead:"شريك واحد لصالة الضيوف والمطبخ معاً بمنتجات مختارة لتحمّل الاستخدام المهني اليومي",
-  c1_t:"البورسلان وأطباق التقديم",c1_d:"صحون وأوعية وقطع تقديم من البورسلان الفاخر والفندقي من الأبيض الكلاسيكي إلى المجموعات المميزة",
+  c1_t:"البورسلان",c1_d:"صحون وأوعية وقطع تقديم من البورسلان الفاخر والفندقي من الأبيض الكلاسيكي إلى المجموعات المميزة",
   c2_t:"الزجاجيات",c2_d:"كؤوس للنبيذ والماء والكوكتيل وأدوات البار من الكريستال والزجاج المقوّى المناسب لغسالات الصحون التجارية",
   c3_t:"أدوات المائدة",c3_d:"ملاعق وشوك وسكاكين من الفولاذ المقاوم للصدأ للمطاعم الراقية والمآدب والخدمة اليومية",
   c4_t:"البوفيه والتقديم",c4_d:"سخانات الطعام ومنصات العرض ومعدات التقديم للفطور والمآدب والمناسبات",
@@ -603,7 +612,7 @@ document.querySelectorAll("[data-i18n-ph]").forEach(el=>{ T.en[el.dataset.i18nPh
 
 let lang="en";
 function renderBrands(){
-  document.getElementById("brandGrid").innerHTML=BRANDS.map(b=>`<div class="brand">${lang==="ar"?b[1]:b[0]}</div>`).join("");
+  document.getElementById("brandGrid").innerHTML=BRAND_CATS.map(c=>`<div class="bcat"><h3>${lang==="ar"?c.ar:c.en}</h3><div class="bcat-list">${c.brands.map(b=>`<div class="brand">${lang==="ar"?BRAND_AR[b]:b}</div>`).join("")}</div></div>`).join("");
 }
 function setLang(l){
   lang=l;
